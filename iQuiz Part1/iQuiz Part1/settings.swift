@@ -19,7 +19,7 @@ class settings: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        urlEntry.text = "http://tednewardsandbox.site44.com/"
+        urlEntry.text = "http://tednewardsandbox.site44.com/questions.json"
         saved.hidden = true
     }
     
@@ -33,16 +33,16 @@ class settings: UIViewController {
     }
     
     @IBAction func update(sender: AnyObject) {
-        let url = urlEntry.text!
+        url = urlEntry.text!
         httpGet(url)
         saved.hidden = false
     }
     
     
     func httpGet(url : String) {
-        let url: NSURL = NSURL(string: url)!
+        let urlPath: NSURL = NSURL(string: url)!
         let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithURL(url, completionHandler: {data, response, error -> Void in
+        let task = session.dataTaskWithURL(urlPath, completionHandler: {data, response, error -> Void in
             if error != nil {
                 print(error!.localizedDescription)
             }
