@@ -45,14 +45,15 @@ class settings: UIViewController {
         let task = session.dataTaskWithURL(urlPath, completionHandler: {data, response, error -> Void in
             if error != nil {
                 print(error!.localizedDescription)
-            }
-            var err: NSError?
-            do{
-                self.savedQuiz = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! [Dictionary<String, AnyObject>]
-                let defaults = NSUserDefaults.standardUserDefaults()
-                defaults.setObject(self.savedQuiz, forKey: "quizData")
-            }catch{
+            } else {
+                var err: NSError?
+                do{
+                    self.savedQuiz = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! [Dictionary<String, AnyObject>]
+                    let defaults = NSUserDefaults.standardUserDefaults()
+                    defaults.setObject(self.savedQuiz, forKey: "quizData")
+                }catch{
                 
+                }
             }
         })
         task.resume()
